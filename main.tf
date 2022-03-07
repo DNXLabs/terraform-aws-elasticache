@@ -63,7 +63,7 @@ resource "aws_elasticache_subnet_group" "redis_subnet_group" {
 
 resource "aws_ssm_parameter" "redis_ssm_parameter" {
   for_each    = { for param in try(var.redis_parameters, []) : param.name => param }
-  name        = "/elasticache/redis/${var.name}/${each.value.name}"
+  name        = "/elasticache/redis/${var.name}-${var.env}/${each.value.name}"
   description = each.value.name
   type        = "SecureString"
   value       = each.value.value
