@@ -170,9 +170,3 @@ variable "notification_topic_arn" {
   type        = string
   default     = ""
 }
-
-variable "secret_method" {
-  description = "Use ssm for SSM parameters store which is the default option, or secretsmanager for AWS Secrets Manager"
-  type        = string
-  default     = "ssm"
-}
