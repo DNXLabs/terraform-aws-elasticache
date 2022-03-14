@@ -1,3 +1,4 @@
+<!-- BEGIN_TF_DOCS -->
 # A Terraform module to create a Redis ElastiCache cluster
 
 A terraform module providing a Redis ElastiCache cluster in AWS.
@@ -114,3 +115,4 @@ Module managed by [DNX Solutions](https://github.com/DNXLabs).
 ## License
 
 Apache 2 Licensed. See [LICENSE](https://github.com/DNXLabs/terraform-aws-template/blob/master/LICENSE) for full details.
+<!-- END_TF_DOCS -->
