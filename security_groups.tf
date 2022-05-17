@@ -8,14 +8,15 @@ resource "aws_security_group" "redis_security_group" {
   }
 }
 
-resource "aws_security_group_rule" "redis_ingress" {
-  count                    = length(var.allowed_security_groups)
+resource "aws_security_group_rule" "redis_inbound_from_sg" {
+  for_each                 = { for security_group_id in var.allow_security_group_ids : security_group_id.name => security_group_id }
   type                     = "ingress"
   from_port                = var.redis_port
   to_port                  = var.redis_port
   protocol                 = "tcp"
-  source_security_group_id = element(var.allowed_security_groups, count.index)
+  source_security_group_id = each.value.security_group_id
   security_group_id        = aws_security_group.redis_security_group.id
+  description              = try(each.value.description, "From ${each.value.security_group_id}")
 }
 
 resource "aws_security_group_rule" "redis_networks_ingress" {

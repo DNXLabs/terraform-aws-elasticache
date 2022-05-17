@@ -23,12 +23,16 @@ variable "apply_immediately" {
 variable "allowed_cidr" {
   description = "A list of Security Group ID's to allow access to."
   type        = list(string)
-  default     = ["127.0.0.1/32"]
+  default     = []
 }
 
-variable "allowed_security_groups" {
-  description = "A list of Security Group ID's to allow access to."
-  type        = list(string)
+variable "allow_security_group_ids" {
+  type        = list(object({
+    security_group_id = string
+    description = string
+    name = string
+  }))
+  description = "List of Security Group IDs to allow connection to."
   default     = []
 }
 
