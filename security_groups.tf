@@ -20,10 +20,12 @@ resource "aws_security_group_rule" "redis_inbound_from_sg" {
 }
 
 resource "aws_security_group_rule" "redis_networks_ingress" {
+  for_each          = { for cidr in var.allowed_cidr : cidr.name => cidr }
   type              = "ingress"
   from_port         = var.redis_port
   to_port           = var.redis_port
   protocol          = "tcp"
-  cidr_blocks       = var.allowed_cidr
+  cidr_blocks       = each.value.cidr
   security_group_id = aws_security_group.redis_security_group.id
+  description       = try(each.value.description, "From ${each.value.cidr}")
 }
