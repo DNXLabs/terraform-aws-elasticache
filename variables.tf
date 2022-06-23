@@ -178,3 +178,10 @@ variable "notification_topic_arn" {
   type        = string
   default     = ""
 }
+
+variable "cluster_slots" {
+  description = "An Amazon Resource Name (ARN) of an SNS topic to send ElastiCache notifications to. Example: arn:aws:sns:us-east-1:012345678999:my_sns_topic"
+  type        = list
+  default     = []
+  
+}
