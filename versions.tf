@@ -4,6 +4,7 @@ terraform {
     aws = {
       source = "tfproviders/aws"
       version = "4.66.0"
+      configuration_aliases = [ aws.alternate ]
     }
   }
 }
