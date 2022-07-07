@@ -25,7 +25,7 @@ resource "aws_security_group_rule" "redis_networks_ingress" {
   from_port         = var.redis_port
   to_port           = var.redis_port
   protocol          = "tcp"
-  cidr_blocks       = each.value.cidr
+  cidr_blocks       = [each.value.cidr]
   security_group_id = aws_security_group.redis_security_group.id
   description       = try(each.value.description, "From ${each.value.cidr}")
 }
