@@ -19,5 +19,5 @@ output "port" {
 }
 
 output "endpoint" {
-  value = aws_elasticache_replication_group.redis.primary_endpoint_address
+  value = var.redis_cluster_enable == true ? aws_elasticache_replication_group.redis.configuration_endpoint_address : aws_elasticache_replication_group.redis.primary_endpoint_address
 }

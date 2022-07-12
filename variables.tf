@@ -55,6 +55,26 @@ variable "redis_clusters" {
   type        = string
 }
 
+variable "redis_cluster_enable" {
+  description = "Enable or disable cluster mode"
+  type        = bool
+  default     = false
+}
+
+variable "redis_cluster_num_node_groups" {
+  description = "Number of node groups"
+  type        = number
+  default     = 2
+}
+
+variable "redis_cluster_replicas_per_node_group" {
+  description = "Replicas per node group"
+  type        = number
+  default     = 1
+}
+
+
+
 variable "redis_failover" {
   type    = bool
   default = false
