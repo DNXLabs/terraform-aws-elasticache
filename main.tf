@@ -65,5 +65,5 @@ resource "aws_elasticache_parameter_group" "redis_parameter_group" {
 
 resource "aws_elasticache_subnet_group" "redis_subnet_group" {
   name       = replace(format("%.255s", lower(replace("tf-redis-${var.name}-${var.env}-${var.vpc_id}", "_", "-"))), "/\\s/", "-")
-  subnet_ids = data.aws_subnet_ids.selected.ids
+  subnet_ids = data.aws_subnets.selected.ids
 }
