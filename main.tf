@@ -8,7 +8,7 @@ resource "random_id" "salt" {
 
 resource "aws_elasticache_replication_group" "redis" {
   replication_group_id          = format("%.20s", "${var.name}-${var.env}")
-  replication_group_description = "Terraform-managed ElastiCache replication group for ${var.name}-${var.env}-${var.vpc_id}"
+  description                   = "Terraform-managed ElastiCache replication group for ${var.name}-${var.env}-${var.vpc_id}"
   node_type                     = var.redis_node_type
   automatic_failover_enabled    = var.redis_failover
   auto_minor_version_upgrade    = var.auto_minor_version_upgrade
