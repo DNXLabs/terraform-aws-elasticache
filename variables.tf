@@ -204,3 +204,32 @@ variable "secret_method" {
   type        = string
   default     = "ssm"
 }
+
+variable "engine_type" {
+  description = "Select which engine type to be provided (redis or memcached)"
+  type        = string
+  default     = "redis"
+}
+
+variable "memcached_node_type" {
+  description = "Instance type to use for creating the Memcached cluster"
+  type        = string
+  default     = "cache.m3.medium"
+}
+
+variable "num_cache_nodes" {
+  description = "The initial number of cache nodes that the cache cluster will have."
+  type        = number
+  default     = 1
+}
+
+variable "memcached_parameters" {
+  description = "additional parameters modifyed in parameter group"
+  type        = list(map(any))
+  default     = []
+}
+
+variable "memcached_port" {
+  type    = number
+  default = 11211
+}
