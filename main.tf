@@ -8,7 +8,7 @@ resource "random_id" "salt" {
 
 resource "aws_elasticache_replication_group" "redis" {
   replication_group_id          = format("%.20s", "${var.name}-${var.env}")
-  replication_group_description = "Terraform-managed ElastiCache replication group for ${var.name}-${var.env}-${var.vpc_id}"
+  description                   = "Terraform-managed ElastiCache replication group for ${var.name}-${var.env}-${var.vpc_id}"
   node_type                     = var.redis_node_type
   automatic_failover_enabled    = var.redis_failover
   auto_minor_version_upgrade    = var.auto_minor_version_upgrade
@@ -33,14 +33,8 @@ resource "aws_elasticache_replication_group" "redis" {
   snapshot_window               = var.redis_snapshot_window
   snapshot_retention_limit      = var.redis_snapshot_retention_limit
   tags                          = merge(tomap({ "Name" = format("tf-elasticache-%s-%s", var.name, var.vpc_id) }), var.tags)
-
-  dynamic "cluster_mode" {
-    for_each = var.redis_cluster_enable ? [1] : [0]
-    content {
-      num_node_groups         = var.redis_cluster_num_node_groups
-      replicas_per_node_group = var.redis_cluster_replicas_per_node_group
-    }
-  }
+  num_node_groups               = var.redis_cluster_enable ? var.redis_cluster_num_node_groups : null
+  replicas_per_node_group       = var.redis_cluster_enable ? var.redis_cluster_replicas_per_node_group : null
 }
 
 resource "aws_elasticache_parameter_group" "redis_parameter_group" {
@@ -65,5 +59,5 @@ resource "aws_elasticache_parameter_group" "redis_parameter_group" {
 
 resource "aws_elasticache_subnet_group" "redis_subnet_group" {
   name       = replace(format("%.255s", lower(replace("tf-redis-${var.name}-${var.env}-${var.vpc_id}", "_", "-"))), "/\\s/", "-")
-  subnet_ids = data.aws_subnet_ids.selected.ids
+  subnet_ids = data.aws_subnets.selected.ids
 }
