@@ -18,8 +18,7 @@ variable "subnet_tags_filter" {
   description = "Custom tags to set on the Instances in the ASG"
   type        = map(string)
   default = {
-    "tag:Name" = "Private*",
-    "vpc-id" = var.vpc_id
+    "tag:Name" = "Private*"
   }
 }
 
