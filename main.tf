@@ -35,6 +35,7 @@ resource "aws_elasticache_replication_group" "redis" {
   tags                          = merge(tomap({ "Name" = format("tf-elasticache-%s-%s", var.name, var.vpc_id) }), var.tags)
   num_node_groups               = var.redis_cluster_enable ? var.redis_cluster_num_node_groups : null
   replicas_per_node_group       = var.redis_cluster_enable ? var.redis_cluster_replicas_per_node_group : null
+  user_group_ids                = var.user_group_ids
 }
 
 resource "aws_elasticache_parameter_group" "redis_parameter_group" {
