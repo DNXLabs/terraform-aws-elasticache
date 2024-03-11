@@ -12,6 +12,7 @@ resource "aws_elasticache_replication_group" "redis" {
   node_type                  = var.redis_node_type
   automatic_failover_enabled = var.redis_failover
   auto_minor_version_upgrade = var.auto_minor_version_upgrade
+  availability_zones         = var.availability_zones
   multi_az_enabled           = var.multi_az_enabled
   engine                     = "redis"
   at_rest_encryption_enabled = var.at_rest_encryption_enabled
@@ -34,6 +35,7 @@ resource "aws_elasticache_replication_group" "redis" {
   tags                       = merge(tomap({ "Name" = format("tf-elasticache-%s-%s", var.name, var.vpc_id) }), var.tags)
   num_node_groups            = var.redis_cluster_enable ? var.redis_cluster_num_node_groups : null
   replicas_per_node_group    = var.redis_cluster_enable ? var.redis_cluster_replicas_per_node_group : null
+  user_group_ids             = var.user_group_ids
 }
 
 resource "aws_elasticache_parameter_group" "redis_parameter_group" {
