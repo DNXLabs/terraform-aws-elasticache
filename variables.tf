@@ -114,7 +114,7 @@ variable "vpc_id" {
 variable "redis_version" {
   description = "Redis version to use, defaults to 3.2.10"
   type        = string
-  default     = "3.2.10"
+  default     = "6.2"
 }
 
 

@@ -3,7 +3,6 @@ data "aws_subnets" "selected" {
     name   = "vpc-id"
     values = [var.vpc_id]
   }
-
   dynamic "filter" {
     for_each = var.subnet_tags_filter
     iterator = tag

@@ -12,7 +12,6 @@ resource "aws_elasticache_replication_group" "redis" {
   node_type                  = var.redis_node_type
   automatic_failover_enabled = var.redis_failover
   auto_minor_version_upgrade = var.auto_minor_version_upgrade
-  availability_zones         = var.availability_zones
   multi_az_enabled           = var.multi_az_enabled
   engine                     = "redis"
   at_rest_encryption_enabled = var.at_rest_encryption_enabled
@@ -44,7 +43,8 @@ resource "aws_elasticache_parameter_group" "redis_parameter_group" {
   description = "Terraform-managed ElastiCache parameter group for ${var.name}-${var.env}-${var.vpc_id}"
 
   # Strip the patch version from redis_version var
-  family = "redis${replace(var.redis_version, "/\\.[\\d]+$/", "")}"
+  # family = "redis${replace(var.redis_version, "/\\.[\\d]+$/", "")}"
+  family = local.major_version >= 6 ? "redis${local.major_version}.x" : "redis${replace(var.redis_version, "/\\.[\\d]+$/", "")}"
   dynamic "parameter" {
     for_each = var.redis_parameters
     content {
