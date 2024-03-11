@@ -14,6 +14,15 @@ variable "alarm_actions" {
 }
 */
 
+variable "subnet_tags_filter" {
+  description = "Custom tags to set on the Instances in the ASG"
+  type        = map(string)
+  default = {
+    "tag:Name" = "Private*"
+  }
+}
+
+
 variable "apply_immediately" {
   description = "Specifies whether any modifications are applied immediately, or during the next maintenance window. Default is false."
   type        = bool

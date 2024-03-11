@@ -1,7 +1,7 @@
 resource "aws_security_group" "redis_security_group" {
   name        = format("%.255s", "tf-sg-ec-${var.name}-${var.env}-${var.vpc_id}")
   description = "Terraform-managed ElastiCache security group for ${var.name}-${var.env}-${var.vpc_id}"
-  vpc_id      = data.aws_vpc.selected.id
+  vpc_id      = var.vpc_id
 
   tags = {
     Name = "tf-sg-ec-${var.name}-${var.env}-${var.vpc_id}"
