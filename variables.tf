@@ -227,5 +227,5 @@ variable "create_redis_subnet_group" {
 
 variable "redis_subnet_group_id" {
   description = "Redis subnet group id"
-  type        = string  
+  type        = string
 }
