@@ -219,3 +219,13 @@ variable "user_group_ids" {
   type        = set(string)
   default     = null
 }
+
+variable "create_redis_subnet_group" {
+  description = "Create a Subnet group?"
+  default     = true
+}
+
+variable "redis_subnet_group_id" {
+  description = "Redis subnet group id"
+  type        = string  
+}

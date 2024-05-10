@@ -7,7 +7,7 @@ output "parameter_group" {
 }
 
 output "redis_subnet_group_name" {
-  value = aws_elasticache_subnet_group.redis_subnet_group.name
+  value = var.create_redis_subnet_group == true ? aws_elasticache_subnet_group.redis_subnet_group[0].name : ""
 }
 
 output "id" {
