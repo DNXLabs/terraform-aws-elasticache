@@ -18,7 +18,7 @@ variable "subnet_tags_filter" {
   description = "Custom tags to set on the Instances in the ASG"
   type        = map(string)
   default = {
-    "tag:Name" = "Private*"
+    "tag:Name" = "*Private*"
   }
 }
 
