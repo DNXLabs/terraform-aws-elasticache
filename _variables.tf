@@ -116,7 +116,7 @@ variable "engine" {
   default = "redis"
   validation {
     condition     = contains(["redis", "valkey", "memcached"], var.engine)
-    error_message = "Only 'redis', 'valkey' or 'memcached' is supported"
+    error_message = "Only 'redis', 'valkey' or 'memcached' is supported."
   }
 }
 
