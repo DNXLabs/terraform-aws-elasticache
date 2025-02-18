@@ -15,7 +15,7 @@ resource "aws_elasticache_replication_group" "default" {
   engine_version             = var.engine_version
   port                       = var.port
   parameter_group_name       = aws_elasticache_parameter_group.parameter_group.id
-  subnet_group_name          = try(aws_elasticache_subnet_group.default[0].id, var.subnet_group_id)
+  subnet_group_name          = var.create_subnet_group ? aws_elasticache_subnet_group.default[0].id : var.subnet_group_id
   security_group_names       = var.security_group_names
   security_group_ids         = [aws_security_group.default.id]
   snapshot_arns              = var.snapshot_arns
@@ -29,4 +29,5 @@ resource "aws_elasticache_replication_group" "default" {
   num_node_groups            = var.cluster_enabled ? var.cluster_num_node_groups : null
   replicas_per_node_group    = var.cluster_enabled ? var.cluster_replicas_per_node_group : null
   user_group_ids             = var.user_group_ids
+  auth_token_update_strategy = "ROTATE"
 }

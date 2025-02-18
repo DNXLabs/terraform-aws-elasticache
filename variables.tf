@@ -120,7 +120,6 @@ variable "engine" {
   }
 }
 
-# might want a map
 variable "engine_version" {
   description = "Redis version to use, defaults to 3.2.10"
   type        = string

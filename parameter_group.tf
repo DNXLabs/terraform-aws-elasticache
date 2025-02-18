@@ -4,7 +4,8 @@ resource "aws_elasticache_parameter_group" "parameter_group" {
 
   # Strip the patch version from engine_version var
   # family = "redis${replace(var.engine_version, "/\\.[\\d]+$/", "")}"
-  family = local.major_version >= 7 ? "redis${local.major_version}" : (local.major_version == 6 ? "redis${local.major_version}.x" : "redis${replace(var.engine_version, "/\\.[\\d]+$/", "")}")
+  family = local.major_version >= 7 ? "${var.engine}${local.major_version}" : (local.major_version == 6 ? "${var.engine}${local.major_version}.x" : "${var.engine}${replace(var.engine_version, "/\\.[\\d]+$/", "")}")
+  
   dynamic "parameter" {
     for_each = var.redis_parameters
     content {
