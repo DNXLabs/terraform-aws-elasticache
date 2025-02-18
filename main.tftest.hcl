@@ -43,5 +43,5 @@ run "can_create_redis_replication_group_with_custom_parameters" {
 }
 
 run "can_" {
-  
+
 }
