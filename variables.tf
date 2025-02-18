@@ -83,24 +83,27 @@ variable "cluster_replicas_per_node_group" {
 }
 
 variable "failover_enabled" {
-  type    = bool
-  default = false
+  type        = bool
+  default     = false
+  description = "If the cache cluster should have failover enabled"
 }
 
 variable "multi_az_enabled" {
-  type    = bool
-  default = false
+  type        = bool
+  default     = false
+  description = "If the cache cluster should be multi-az"
 }
 
 variable "node_type" {
   description = "Instance type to use for creating the Redis cache clusters"
   type        = string
-  default     = "cache.m3.medium"
+  default     = "cache.t4g.micro"
 }
 
 variable "port" {
-  type    = number
-  default = 6379
+  type        = number
+  description = "Port to use on cache. 6379 for Redis, 11211 for memcached."
+  default     = 6379
 }
 
 variable "vpc_id" {
