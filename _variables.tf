@@ -171,7 +171,7 @@ variable "availability_zones" {
 variable "at_rest_encryption_enabled" {
   description = "Whether to enable encryption at rest"
   type        = bool
-  default     = false
+  default     = true
 }
 
 variable "kms_key_id" {
