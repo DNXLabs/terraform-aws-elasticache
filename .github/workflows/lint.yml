@@ -46,6 +46,7 @@ jobs:
             terraform validate
             cd -
           done
+
   minimum:
     name: Minimum version check
     runs-on: ubuntu-latest
