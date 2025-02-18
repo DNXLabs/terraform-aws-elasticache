@@ -15,9 +15,9 @@ resource "aws_elasticache_replication_group" "default" {
   engine_version             = var.engine_version
   port                       = var.port
   parameter_group_name       = aws_elasticache_parameter_group.parameter_group.id
-  subnet_group_name          = try(aws_elasticache_subnet_group.subnet_group[0].id, var.subnet_group_id)
+  subnet_group_name          = try(aws_elasticache_subnet_group.default[0].id, var.subnet_group_id)
   security_group_names       = var.security_group_names
-  security_group_ids         = [aws_security_group.security_group.id]
+  security_group_ids         = [aws_security_group.default.id]
   snapshot_arns              = var.snapshot_arns
   snapshot_name              = var.snapshot_name
   apply_immediately          = var.apply_immediately

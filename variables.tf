@@ -61,6 +61,7 @@ variable "name" {
 variable "number_clusters" {
   description = "Number of Redis cache clusters (nodes) to create"
   type        = string
+  default     = 0
 }
 
 variable "cluster_enabled" {
@@ -178,7 +179,7 @@ variable "kms_key_id" {
 }
 
 variable "transit_encryption_enabled" {
-  description = "Whether to enable encryption in transit. Requires 3.2.6 or >=4.0 redis_version"
+  description = "Whether to enable encryption in transit. Requires 3.2.6 or >=4.0 engine_version"
   type        = bool
   default     = false
 }
@@ -234,4 +235,5 @@ variable "create_subnet_group" {
 variable "subnet_group_id" {
   description = "Subnet group ID to use for the replication group"
   type        = string
+  default     = null
 }
