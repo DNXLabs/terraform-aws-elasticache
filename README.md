@@ -35,7 +35,7 @@ module "redis" {
   redis_port                     = try(each.value.redis_port, 6379)
   redis_snapshot_retention_limit = try(each.value.redis_snapshot_retention_limit, 0)
   redis_snapshot_window          = try(each.value.redis_snapshot_window, "06:30-07:30") # "The daily time range (in UTC) during which ElastiCache will begin taking a daily snapshot of your cache cluster."
-  redis_version                  = try(each.value.redis_version, "3.2.10")              # "Whether to enable encryption in transit. Requires 3.2.6 or >=4.0 redis_version"
+  engine_version                  = try(each.value.engine_version, "3.2.10")              # "Whether to enable encryption in transit. Requires 3.2.6 or >=4.0 engine_version"
   snapshot_arns                  = try(each.value.snapshot_arns, [])                    # "A single-element string list containing an Amazon Resource Name (ARN) of a Redis RDB snapshot file stored in Amazon S3. Example: arn:aws:s3:::my_bucket/snapshot1.rdb"
   snapshot_name                  = try(each.value.snapshot_name, "")                    # " The name of a snapshot from which to restore data into the new node group. Changing the snapshot_name forces a new resource"
   tags                           = try(each.value.tags, {})

@@ -1,3 +1,3 @@
 locals {
-  major_version = tonumber(replace(var.redis_version, "/\\.[\\d][\\.\\d]*/", ""))
+  major_version = tonumber(replace(var.engine_version, "/\\.[\\d][\\.\\d]*/", ""))
 }

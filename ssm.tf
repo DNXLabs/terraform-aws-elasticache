@@ -1,14 +1,15 @@
-resource "aws_ssm_parameter" "redis_endpoint" {
+resource "aws_ssm_parameter" "endpoint" {
   count       = var.secret_method == "ssm" ? 1 : 0
-  name        = "/elasticache/redis/${var.env}-${var.name}/ENDPOINT"
+  name        = "/elasticache/${var.engine}/${var.env}-${var.name}/ENDPOINT"
   description = "Elasticache Redis Endpoint"
   type        = "String"
-  value       = aws_elasticache_replication_group.redis.cluster_enabled ? aws_elasticache_replication_group.redis.configuration_endpoint_address : aws_elasticache_replication_group.redis.primary_endpoint_address
+  value       = aws_elasticache_replication_group.default[0].cluster_enabled ? aws_elasticache_replication_group.default[0].configuration_endpoint_address : aws_elasticache_replication_group.default[0].primary_endpoint_address
 }
-resource "aws_ssm_parameter" "redis_port" {
+
+resource "aws_ssm_parameter" "port" {
   count       = var.secret_method == "ssm" ? 1 : 0
-  name        = "/elasticache/redis/${var.env}-${var.name}/PORT"
+  name        = "/elasticache/${var.engine}/${var.env}-${var.name}/PORT"
   description = "Elasticache Redis Port"
   type        = "String"
-  value       = aws_elasticache_replication_group.redis.port
+  value       = aws_elasticache_replication_group.default[0].port
 }

@@ -1,0 +1,13 @@
+# name: Lint
+
+# on: [push]
+
+# jobs:
+#   test:
+#     name: Run Tests
+#     runs-on: ubuntu-latest
+#     container:
+#       image: hashicorp/terraform:latest
+#     steps:
+#       - uses: actions/checkout@v4
+#       - run: terraform test
