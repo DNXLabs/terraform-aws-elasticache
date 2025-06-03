@@ -177,7 +177,7 @@ variable "at_rest_encryption_enabled" {
 variable "kms_key_id" {
   description = "The ARN of the key that you wish to use if encrypting at rest. If not supplied, uses service managed encryption. Can be specified only if at_rest_encryption_enabled = true"
   type        = string
-  default     = ""
+  default     = null
 }
 
 variable "transit_encryption_enabled" {
@@ -238,4 +238,19 @@ variable "subnet_group_id" {
   description = "Subnet group ID to use for the replication group"
   type        = string
   default     = null
+}
+
+variable "cache_usage_limits" {
+  type = map(object({
+    data_storage = optional(object({
+      minimum = optional(number)
+      maximum = optional(number)
+      unit    = optional(string)
+    }))
+    ecpu_per_second = optional(object({
+      minimum = optional(number)
+      maximum = optional(number)
+    }))
+  }))
+  default = {}
 }

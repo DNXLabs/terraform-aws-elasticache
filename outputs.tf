@@ -3,7 +3,7 @@ output "security_group_id" {
 }
 
 output "parameter_group" {
-  value = aws_elasticache_parameter_group.parameter_group.id
+  value = aws_elasticache_parameter_group.parameter_group[*].id
 }
 
 output "subnet_group_name" {
@@ -11,7 +11,7 @@ output "subnet_group_name" {
 }
 
 output "id" {
-  value = aws_elasticache_replication_group.default[0].id
+  value = var.node_type != "serverless" ? aws_elasticache_replication_group.default[0].id : ""
 }
 
 output "port" {
@@ -19,5 +19,5 @@ output "port" {
 }
 
 output "endpoint" {
-  value = var.cluster_enabled == true ? aws_elasticache_replication_group.default[0].configuration_endpoint_address : aws_elasticache_replication_group.default[0].primary_endpoint_address
+  value = var.node_type != "serverless" ? (var.cluster_enabled == true ? aws_elasticache_replication_group.default[0].configuration_endpoint_address : aws_elasticache_replication_group.default[0].primary_endpoint_address) : ""
 }

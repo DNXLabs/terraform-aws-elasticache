@@ -1,6 +1,6 @@
 resource "aws_elasticache_replication_group" "default" {
   # count = contains(["redis", "valkey"], var.engine) && var.redis_clusters > 1 && var.redis_cluster_enable ? var.redis_clusters : 0
-  count                      = contains(["redis", "valkey"], var.engine) ? 1 : 0
+  count                      = var.node_type != "serverless" ? (contains(["redis", "valkey"], var.engine) ? 1 : 0) : 0
   replication_group_id       = format("%.20s", "${var.name}-${var.env}")
   description                = "Terraform-managed ElastiCache replication group for ${var.name}-${var.env}-${var.vpc_id}"
   node_type                  = var.node_type
@@ -14,7 +14,7 @@ resource "aws_elasticache_replication_group" "default" {
   auth_token                 = var.transit_encryption_enabled ? var.auth_token : null
   engine_version             = var.engine_version
   port                       = var.port
-  parameter_group_name       = aws_elasticache_parameter_group.parameter_group.id
+  parameter_group_name       = aws_elasticache_parameter_group.parameter_group[0].id
   subnet_group_name          = var.create_subnet_group ? aws_elasticache_subnet_group.default[0].id : var.subnet_group_id
   security_group_names       = var.security_group_names
   security_group_ids         = [aws_security_group.default.id]
