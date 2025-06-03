@@ -1,7 +1,7 @@
 resource "aws_elasticache_serverless_cache" "this" {
   count         = var.node_type == "serverless" ? 1 : 0
   engine        = var.engine
-  name          = var.name
+  name          = format("%.20s", "${var.name}-${var.env}")
   description   = "Terraform-managed ElastiCache replication group for ${var.name}-${var.env}-${var.vpc_id}"
   
   dynamic "cache_usage_limits" {
